@@ -30,7 +30,7 @@ class Peliculas:
                     print("Se encontraron Peliculas duplicadas en el Archivo de Datos")
                     self.listadepeliculas.append(datos)
 
-        self.imprimir()
+       
 
     def Buscar(self, nombre):
         for dato in self.listadepeliculas:
@@ -44,11 +44,39 @@ class Peliculas:
 
         return False
 
-    def imprimir(self):
-        print("")
-        print("********************************PELICULAS REGISTRADAS*******************************************")
-        print("------------------------------------------------------------------------------------------------")
-        for i in self.listadepeliculas:
-            for key, value in i.items():
-                print(key, "-", value )
-        print("------------------------------------------------------------------------------------------------\n")
+    def imprimir(self,op):
+        n = 0
+        if op==1:
+            print("")
+            print("********************************PELICULAS REGISTRADAS*******************************************")
+            print("------------------------------------------------------------------------------------------------")
+            for i in self.listadepeliculas:
+                for key, value in i.items():
+                    print(key, "-", value )
+            print("------------------------------------------------------------------------------------------------\n")
+        elif op==2:
+            npelicula=0
+            print("\n-----------------------------------------")
+            print("*********PELICULAS REGISTRADAS***********")
+            print("-----------------------------------------")
+           
+            for x in self.listadepeliculas:
+                n=n+1
+                print(str(n)+'.'+ str(x["Nombre"]) )
+
+            print("-----------------------------------------")
+            npelicula= int(input("Eliga la pelicula: "))
+            peli=self.listadepeliculas[npelicula-1]
+            actores = peli["Actores"].split(",")
+            
+            print("\n----------------------------------------")
+            print("*********PELICULAS Elegida****************")
+            print("------------------------------------------")
+            print(""+str(peli["Nombre"])+"")
+            print("-------------------------------------------")
+            print("\n********ACTORES************")
+            for a in actores:
+                print(a)
+            
+            print("-------------------------------------------\n")
+

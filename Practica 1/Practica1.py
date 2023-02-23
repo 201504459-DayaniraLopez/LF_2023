@@ -54,9 +54,9 @@ def Peliculas():
             op_peliculas = int(input("Ingrese una opcion: "))
             if op_peliculas < 4 and op_peliculas > 0:
                 if op_peliculas == 1:
-                    print("mostrar peliculas")
+                    Datos.imprimir(op_peliculas)
                 elif op_peliculas == 2:
-                    print("mostrar actores")
+                    Datos.imprimir(op_peliculas)
                 elif op_peliculas == 3:
                     menu()
             else:
