@@ -1,7 +1,8 @@
 from tkinter import  filedialog
 
 import re
-
+import Funcionamiento
+Datos = Funcionamiento.Peliculas()
 
 def menu():
     Instruciones=None
@@ -16,7 +17,7 @@ def menu():
         print("|5.Salir                  |")
         print("└-------------------------┘")
         try:
-            opcion = int(input("Ingrese una opcion: "))
+            opcion = int(input("Ingrese una opción: "))
             if opcion < 6 and opcion > 0 :
                 if opcion == 1:
                     CargarData()
@@ -35,9 +36,10 @@ def menu():
             print("El caracter ingresado no es valido")
 
 def CargarData():
-    print("cargar")
-    ruta = filedialog.askopenfilename(initialdir = "/", title= "Selecione Archivo",filetypes = (("data files","*.data"),("todos los archivos","*.*")))
-    archivo = open(ruta,"r")
+    print("CARGA DE DATOS")
+    ruta = filedialog.askopenfilename(initialdir="C:", title="Selecione Archivo", filetypes=(
+        ("data files", "*.lfp"), ("todos los archivos", "*.*")))
+    Datos.Guardar(ruta)
     
 def Peliculas():
    condicion = True
