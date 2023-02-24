@@ -38,10 +38,6 @@ class Peliculas:
                     print("Se encontraron Peliculas duplicadas en el Archivo de Datos")
                     self.listadepeliculas.append(datos)
 
-
-
-       
-
     def BuscarP(self, nombre):
         for dato in self.listadepeliculas:
             if dato["Nombre"] == nombre:
@@ -57,8 +53,7 @@ class Peliculas:
     def imprimir(self,op):
         n = 0
         x = 0
-        j = 0
-        f = 0  
+      
         if op==1:
             print("")
             print("********************************PELICULAS REGISTRADAS*******************************************")
@@ -79,37 +74,53 @@ class Peliculas:
                 print(str(n)+'.'+ str(x["Nombre"]) )
 
             print("-----------------------------------------")
-            npelicula= int(input("Eliga la pelicula: "))
-            peli=self.listadepeliculas[npelicula-1]
-            actores = peli["Actores"].split(",")
-            print("\n----------------------------------------")
-            print("*********PELICULAS Elegida****************")
-            print("------------------------------------------")
-            print(""+str(peli["Nombre"])+"")
-            print("-------------------------------------------")
-            print("***************ACTORES*********************")
-            print("-------------------------------------------\n")
-            for a in actores:
-                print(a)
-            print("-------------------------------------------\n")
+            try:
+                npelicula= int(input("Eliga la pelicula: "))
+                try:
+                    peli=self.listadepeliculas[npelicula-1]
+                    actores = peli["Actores"].split(",")
+                    print("\n----------------------------------------")
+                    print("*********PELICULAS Elegida****************")
+                    print("------------------------------------------")
+                    print(""+str(peli["Nombre"])+"")
+                    print("-------------------------------------------")
+                    print("***************ACTORES*********************")
+                    print("-------------------------------------------\n")
+                    for a in actores:
+                        print(a)
+                    print("-------------------------------------------\n")
+                except IndexError:
+                    print("La pelicula elegida no existe")
+              
+            except ValueError:
+                    print("El caracter ingresado no es valido")
+                    
+        
         elif op==3:
             npelicula = 0
             print("\n----------------------------------------")
             print("**********ACTORES REGISTRADOS**************")
             print("------------------------------------------")
             self.Eliminar(self.listaactores)
-            nactor = int(input("Eliga el Actor que desea: "))
-            actor = self.listaactores[nactor-1]
-            print("\nActor Elegido: " +actor)
-            print("\n----------------------------------------")
-            print("****PELICULAS EN LAS QUE HAN ACTUADO******")
-            print("------------------------------------------")
-            for pelitem in self.listadepeliculas:
-                temp = pelitem["Actores"].split(",")
-                for p in temp:
-                    if p.strip() == actor:
-                        print(pelitem["Nombre"])
-            print("------------------------------------------\n")
+            try:
+                nactor = int(input("Eliga el Actor que desea: "))
+                try:
+                    actor = self.listaactores[nactor-1]
+                    print("\nActor Elegido: " +actor)
+                    print("\n----------------------------------------")
+                    print("****PELICULAS EN LAS QUE HAN ACTUADO******")
+                    print("------------------------------------------")
+                    for pelitem in self.listadepeliculas:
+                        temp = pelitem["Actores"].split(",")
+                        for p in temp:
+                            if p.strip() == actor:
+                                print(pelitem["Nombre"])
+                    print("------------------------------------------\n")
+                except IndexError:
+                    print("El actor elegida no existe")
+
+            except ValueError:
+                    print("El caracter ingresado no es valido")
         elif op==4:
             listaaño = []
             print("\n----------------------------------------")
@@ -117,20 +128,25 @@ class Peliculas:
             print("------------------------------------------")
             
             for year in self.listadepeliculas:
-                listaaño.append(year["Año"])
-            
+                listaaño.append(year["Año"].strip())
             self.Eliminar(listaaño)
-            
-            nyear = input("Eliga el año que  desea: ")
-            print("\nAño Elegido:" + nyear)
-            print("\n--------------------------------------------")
-            print("****************PELICULAS*********************")
-            print("----------------------------------------------")
-            for movie in self.listadepeliculas:
-                if nyear.strip() == movie["Año"]:
-                        print("Nombre: "+movie["Nombre"])
-                        print("Género: "+movie["Genero"])
+            try:
+                nyear = int(input("Eliga el año que desea: "))
+                if listaaño.count(str(nyear))>0:
+                        print("\nAño Elegido: " + str(nyear))
+                        print("\n--------------------------------------------")
+                        print("****************PELICULAS*********************")
                         print("----------------------------------------------")
+                        for movie in self.listadepeliculas:
+                            if nyear== int(movie["Año"]):
+                                    print("Nombre: "+movie["Nombre"])
+                                    print("Género: "+movie["Genero"])
+                                    print("----------------------------------------------")
+                else:
+                    print("El año ingresado no esta registrado.")
+            except ValueError:
+                print("El caracter ingresado no es valido")
+           
         elif op == 5:
             listagenero = []
             print("\n----------------------------------------")
@@ -141,14 +157,17 @@ class Peliculas:
             
             self.Eliminar(listagenero)
             
-            ngenero = input("Eliga el Genero que desea ")
-            print("\nGenero elegido: " + ngenero)
-            print("\n------------------------------------------")
-            print("****************PELICULAS*******************")
-            print("--------------------------------------------")
-            for movie in self.listadepeliculas:
-                if ngenero.strip() == movie["Genero"]:
-                        print("*"+movie["Nombre"])
+            ngenero = input("Escriba el Genero que desea: ")
+            if listagenero.count(ngenero) > 0:
+                print("\nGenero elegido: " + ngenero)
+                print("\n------------------------------------------")
+                print("****************PELICULAS*******************")
+                print("--------------------------------------------")
+                for movie in self.listadepeliculas:
+                    if ngenero.strip() == movie["Genero"]:
+                            print("*"+movie["Nombre"])
+            else:
+                print("El genero seleccionado no esta en la lista")
                 
     def Eliminar(self, lista):
         x=0

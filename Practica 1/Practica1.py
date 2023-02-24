@@ -1,8 +1,17 @@
 from tkinter import  filedialog
-
 import re
 import Funcionamiento
 Datos = Funcionamiento.Peliculas()
+
+
+def inicio():
+    print("Lenguajes Formales y de Programación")
+    print("Sección -A")
+    print("Sandra Dayanira López Gómez")
+    print("201504459")
+    if input("Presione una tecla para continuar: ")=="":
+        menu()
+    
 
 def menu():
     Instruciones=None
@@ -17,7 +26,7 @@ def menu():
         print("|5.Salir                  |")
         print("└-------------------------┘")
         try:
-            opcion = int(input("Ingrese una opción: "))
+            opcion = int(input("Ingrese una opción "))
             if opcion < 6 and opcion > 0 :
                 if opcion == 1:
                     CargarData()
@@ -37,10 +46,12 @@ def menu():
 
 def CargarData():
     print("CARGA DE DATOS")
-    ruta = filedialog.askopenfilename(initialdir="C:", title="Selecione Archivo", filetypes=(
-        ("data files", "*.lfp"), ("todos los archivos", "*.*")))
-    Datos.Guardar(ruta)
-    
+    try:
+        ruta = filedialog.askopenfilename(initialdir="C:", title="Selecione Archivo", filetypes=(
+            ("data files", "*.lfp"), ("todos los archivos", "*.*")))
+        Datos.Guardar(ruta)
+    except FileNotFoundError:
+        print("EL ARCHIVO NO FUE CARGADO")
 def Peliculas():
    condicion = True
    op_peliculas = 0
@@ -91,9 +102,9 @@ def Filtrado():
        except ValueError:
           print("El caracter ingresado no es valido")
 
-    
+
 def main():
-    Menu = menu()
+    amonos = inicio()
     return
 
 
