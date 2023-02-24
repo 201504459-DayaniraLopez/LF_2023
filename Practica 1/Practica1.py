@@ -67,6 +67,7 @@ def Peliculas():
 def Filtrado():
    condicion2 = True
    op_filtro = 0
+   
    while (condicion2 == True):
        print("┌-----MENU DE FILTRO---------┐")
        print("|1.Filtrado de Actor         |")
@@ -78,11 +79,11 @@ def Filtrado():
             op_filtro = int(input("Ingrese una opcion: "))
             if op_filtro < 5 and op_filtro > 0:
                 if op_filtro == 1:
-                    print("Filtrado Actor")
+                    Datos.imprimir(3)
                 elif op_filtro == 2:
-                    print("Filtrado de Año")
+                    Datos.imprimir(4)
                 elif op_filtro == 3:
-                    print("Filtrado por Género")
+                    Datos.imprimir(5)
                 elif op_filtro == 4:
                     menu()
             else:
