@@ -9,7 +9,7 @@ def inicio():
     print("Sección -A")
     print("Sandra Dayanira López Gómez")
     print("201504459")
-    if input("Presione una tecla para continuar: ")=="":
+    if input("Presione una tecla para continuar: ") == "" or input("Presione una tecla para continuar: ") != "":
         menu()
     
 
