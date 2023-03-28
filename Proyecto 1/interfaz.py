@@ -18,7 +18,7 @@ class Ventana():
         file_menu = tk.Menu(menu_bar, tearoff=0)
         file_menu.add_command(label="Abrir", command=self.abrir)
         file_menu.add_command(label="Guardar",command=self.guardar)
-        file_menu.add_command(label="Guardar Como")
+        file_menu.add_command(label="Guardar Como", command=self.guardarcomo)
         file_menu.add_command(label="Analizar")
         file_menu.add_command(label="Error")
         file_menu.add_separator()
@@ -52,10 +52,22 @@ class Ventana():
 
 
         self.text_area.insert(tk.END, cadena)
-
+        self.archivo.close
 
     def guardar(self):
-        print(self.text_area.get())   
+        self.archivo = open(self.ruta , "w")
+        lineas = self.text_area.get('1.0','end')
+        self.archivo.write(lineas)
+       
+        MessageBox.showinfo("Informacion", "Documento Guardado con Exito")
+        self.archivo.close
+    def guardarcomo(self):
+        ruta_archivo = filedialog.asksaveasfilename(defaultextension=".jon")
+        if ruta_archivo:
+            with open(ruta_archivo, "w") as archivo:
+                archivo.write("Hola, mundo!\n")
+               
+
 
 def main():
     Ventana()

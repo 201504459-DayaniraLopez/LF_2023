@@ -1,0 +1,2 @@
+Hola, mundo!
+Estoy guardando datos en un archivo con ventana.
